@@ -8,7 +8,7 @@ if __name__ == '__main__':
     config.MNS_ACCESS_KEY = os.getenv('MNS_ACCESS_KEY')
 
     data = {
-        'a': 1,
-        'b': 2,
+        'a': '1',
+        'b': '2',
     }
-    emit('test', data)
+    emit(os.getenv('MNS_QUEUE_NAME'), data)

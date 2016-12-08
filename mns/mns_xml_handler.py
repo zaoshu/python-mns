@@ -116,7 +116,7 @@ class MessageEncoder(EncoderBase):
     def encode(data):
         message = {}
         if data.base64encode:
-            msgbody = base64.b64encode(data.message_body)
+            msgbody = base64.b64encode(data.message_body.encode()).decode()
         else:
             msgbody = data.message_body
         EncoderBase.insert_if_valid("MessageBody", msgbody, "", message)

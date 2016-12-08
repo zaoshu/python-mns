@@ -44,7 +44,7 @@ def loop_queue(queue, func):
             logging.info('received message on [%s]: %s', queue.queue_name,
                          msg.message_body)
             try:
-                data = json.loads(msg.message_body)
+                data = json.loads(msg.message_body.decode())
                 try:
                     func(queue.queue_name, data)
                     # message handled, delete it
