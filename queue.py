@@ -17,7 +17,9 @@ def get_queue(name):
         config.MNS_ACCESS_KEY,
         logger=_null_logger,
     )
-    return Queue(name, client)
+    q = Queue(name, client)
+    q.set_encoding(False)
+    return q
 
 
 def create_queue(queue):
@@ -44,7 +46,7 @@ def loop_queue(queue, func):
             logging.info('received message on [%s]: %s', queue.queue_name,
                          msg.message_body)
             try:
-                data = json.loads(msg.message_body.decode())
+                data = json.loads(msg.message_body)
                 try:
                     func(queue.queue_name, data)
                     # message handled, delete it
