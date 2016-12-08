@@ -24,6 +24,9 @@ def get_queue(name):
 
 def create_queue(queue):
     try:
+        meta = QueueMeta()
+        meta.set_maximum_message_size(65536)
+        meta.set_message_retention_period(345600)
         queue.create(QueueMeta())
         logging.info('create queue succeed, name: %s', queue.queue_name)
     except MNSExceptionBase as e:
